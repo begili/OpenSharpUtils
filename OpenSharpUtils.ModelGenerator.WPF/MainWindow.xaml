@@ -1,0 +1,33 @@
+﻿<Window x:Class="OpenSharpUtils.ModelGenerator.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenSharpUtils.ModelGenerator.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem x:Name="mnuNewProject" Header="New Projects" Click="mnuNewProject_Click"/>
+                <MenuItem x:Name="mnuOpenProject" Header="Open Projects" Click="mnuOpenProject_Click"/>
+                <MenuItem x:Name="mnuSaveProject" Header="Save Project" Click="mnuSaveProject_Click"/>
+                <MenuItem x:Name="mnuClose" Header="Quit" Click="mnuClose_Click" />
+            </MenuItem>
+            <MenuItem Header="Project">
+                <MenuItem x:Name="mnuProjectPreferences" Header="Preferences" Click="mnuProjectPreferences_Click"/>
+            </MenuItem>
+        </Menu>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Path=AvailableProcedures}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=FullName}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding Path=ParameterDisplayString}" Header="Parameter"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

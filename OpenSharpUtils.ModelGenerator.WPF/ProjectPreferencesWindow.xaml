@@ -1,0 +1,90 @@
+﻿<Window x:Class="OpenSharpUtils.ModelGenerator.WPF.ProjectPreferencesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenSharpUtils.ModelGenerator.WPF"
+        mc:Ignorable="d"
+        Title="ProjectPreferencesWindow" Height="500" Width="600" Loaded="Window_Loaded">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem Header="Connection">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Server:" HorizontalAlignment="Right"/>
+                    <Grid  Grid.Column="1" Margin="5,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtServer" Text="{Binding Path=Server, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button x:Name="btnSelectDb" Grid.Column="1" FontFamily="Marlett" FontSize="20" Content="6" Click="btnSelectDb_Click">
+                        </Button>
+                        <Popup IsOpen="True" AllowsTransparency="True" PlacementTarget="{Binding ElementName=txtServer}" Width="{Binding ElementName=txtServer, Path=ActualWidth}" MaxHeight="300" Placement="Bottom" StaysOpen="True">
+                        </Popup>
+                    </Grid>
+                    <TextBlock Text="Use Windows Security:" Grid.Row="1" Margin="0,5,0,0" HorizontalAlignment="Right" />
+                    <CheckBox x:Name="cbUseWindowsAuth" IsChecked="{Binding Path=UseWindowsAuth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" />
+                    <TextBlock Text="Username:" Grid.Row="2" Margin="0,5,0,0" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="txtUsername" Text="{Binding Path=Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=IsUsernameAndPasswordEnabled}" Grid.Row="2" Grid.Column="1" Margin="5,5,0,0" />
+                    <TextBlock Text="Password:" Grid.Row="3" Margin="0,5,0,0" HorizontalAlignment="Right"/>
+                    <PasswordBox x:Name="txtPassword" Grid.Row="3" Grid.Column="1" Margin="5,5,0,0"  IsEnabled="{Binding Path=IsUsernameAndPasswordEnabled}"/>
+                    <ListBox Grid.Row="5" Grid.ColumnSpan="2" Margin="0,10,0,10" ItemsSource="{Binding Path=Catalogs}" SelectionMode="Single">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=IsSelected}" />
+                                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="{Binding Path=Content.Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="btnTestConnection" Content="Connect" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="60" Click="btnTestConnection_Click"/>
+                </Grid>
+            </TabItem>
+            <!--<TabItem Header="Databases">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <DataGrid>
+
+                    </DataGrid>
+                    <Grid Grid.Row="1" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Catalog:" VerticalAlignment="Center" />
+                        <ComboBox x:Name="cmbCatalogs" Margin="5,0,0,0" Grid.Column="1" />
+                    </Grid>
+                </Grid>
+            </TabItem>-->
+        </TabControl>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="btnOK" Content="OK" Click="btnOK_Click" Width="50"/>
+            <Button x:Name="btnClose" Content="Close" Click="btnClose_Click" Width="50" Margin="10,0,0,0"/>
+            <Button x:Name="btnApply" Content="Apply" Click="btnApply_Click" Width="50" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
